@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 13:58:11 by jonascim          #+#    #+#             */
-/*   Updated: 2023/04/25 16:41:44 by helneff          ###   ########.fr       */
+/*   Updated: 2023/04/27 13:41:40 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	main(void)
 	print_scene_values(&scene);
 	if (init_mlx_window(&window, "MiniRT", IMG_WIDTH, IMG_HEIGHT) == -1)
 		panic(1, "Failed to initialize MLX window");
-	init_camera(&camera, &window);
+	init_camera(&camera, (double)IMG_WIDTH / IMG_HEIGHT);
 	mlx_expose_hook(window.win_ptr, expose_hook, &state);
 	mlx_loop(window.mlx_ptr);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:17:43 by helneff           #+#    #+#             */
-/*   Updated: 2023/04/26 14:31:40 by helneff          ###   ########.fr       */
+/*   Updated: 2023/04/27 13:33:39 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_camera
 	t_vec3		ll_corner;
 }	t_camera;
 
-void	init_camera(t_camera *camera, t_window *window);
+void	init_camera(t_camera *camera, double aspect_ratio);
 t_image	*render(t_camera *camera, const t_state *state);
 
 #endif

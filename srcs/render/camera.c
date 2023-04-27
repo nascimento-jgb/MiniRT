@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:51:58 by helneff           #+#    #+#             */
-/*   Updated: 2023/04/26 15:04:54 by helneff          ###   ########.fr       */
+/*   Updated: 2023/04/27 13:38:17 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@
 #include "parser.h"
 #include "color.h"
 
+int	hit_sphere(t_vec3 center, double radius, t_ray ray)
+{
+	const t_vec3	oc = vec3_subtract(ray.orig, center);
+	const double	a = vec3_dot(ray.dir, ray.dir);
+	const double	b = 2.0 * vec3_dot(oc, ray.dir);
+	const double	c = vec3_dot(oc, oc) - radius * radius;
+	const double	discriminant = b * b - 4 * a * c;
+
+	return (discriminant > 0);
+}
+
 static int	ray_color(const t_state *state, t_ray ray)
 {
 	const t_vec3	unit_dir = vec3_unit(ray.dir);
@@ -26,6 +37,8 @@ static int	ray_color(const t_state *state, t_ray ray)
 			vec3_scalar((t_vec3){1.0, 1.0, 1.0}, 1.0 - t),
 			vec3_scalar((t_vec3){0.5, 0.7, 1.0}, t));
 
+	if (hit_sphere((t_vec3){0, 0, -5}, 1, ray))
+		return (int2col(state, 0x00FF0000));
 	return (vec2col(state, color, 0));
 }
 
@@ -57,14 +70,14 @@ static void	iterate_pixels(
 	}
 }
 
-void	init_camera(t_camera *camera, t_window *window)
+void	init_camera(t_camera *camera, double aspect_ratio)
 {
 	camera->orig = (t_vec3){0.0, 0.0, 0.0};
 	camera->dir = (t_vec3){0.0, 0.0, -1.0};
-	camera->aspect_ratio = (double)window->height / window->width;
+	camera->aspect_ratio = aspect_ratio;
 	camera->focal_length = 1;
 	camera->height = 2;
-	camera->width = camera->height * camera->aspect_ratio;
+	camera->width = camera->height * aspect_ratio;
 	camera->hori = (t_vec3){camera->width, 0, 0};
 	camera->vert = (t_vec3){0, camera->height, 0};
 	camera->ll_corner = vec3_subtract(vec3_subtract(vec3_subtract(
