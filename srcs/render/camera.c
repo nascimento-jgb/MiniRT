@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:51:58 by helneff           #+#    #+#             */
-/*   Updated: 2023/04/27 13:38:17 by helneff          ###   ########.fr       */
+/*   Updated: 2023/04/28 15:20:35 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,21 @@
 #include "camera.h"
 #include "parser.h"
 #include "color.h"
-
-int	hit_sphere(t_vec3 center, double radius, t_ray ray)
-{
-	const t_vec3	oc = vec3_subtract(ray.orig, center);
-	const double	a = vec3_dot(ray.dir, ray.dir);
-	const double	b = 2.0 * vec3_dot(oc, ray.dir);
-	const double	c = vec3_dot(oc, oc) - radius * radius;
-	const double	discriminant = b * b - 4 * a * c;
-
-	return (discriminant > 0);
-}
+#include "shape.h"
 
 static int	ray_color(const t_state *state, t_ray ray)
 {
-	const t_vec3	unit_dir = vec3_unit(ray.dir);
-	const double	t = 0.5 * (unit_dir.y + 1.0);
-	const t_vec3	color = vec3_add(
-			vec3_scalar((t_vec3){1.0, 1.0, 1.0}, 1.0 - t),
-			vec3_scalar((t_vec3){0.5, 0.7, 1.0}, t));
+	const t_shape	shape = nearest_intersect(state, ray);
+	t_vec3			color;
 
-	if (hit_sphere((t_vec3){0, 0, -5}, 1, ray))
-		return (int2col(state, 0x00FF0000));
-	return (vec2col(state, color, 0));
+	color = (t_vec3){0, 0, 0};
+	if (shape.type == SHAPE_SPHERE)
+		color = shape.data.sphere->col;
+	else if (shape.type == SHAPE_PLANE)
+		color = shape.data.plane->col;
+	else if (shape.type == SHAPE_CYLINDER)
+		color = shape.data.cylinder->col;
+	return (vec2col(state, vec3_scalar(color, 1.0 / 255.999), 0));
 }
 
 static void	iterate_pixels(
