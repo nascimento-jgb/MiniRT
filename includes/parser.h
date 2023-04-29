@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 16:29:59 by helneff           #+#    #+#             */
-/*   Updated: 2023/04/24 16:28:37 by helneff          ###   ########.fr       */
+/*   Updated: 2023/04/29 09:47:48 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ typedef struct s_sphere_data
 	t_vec3					pos;
 	t_vec3					col;
 	double					diameter;
+	double					half_b;
+	double					a;
+	double					sqrtd;
 }	t_sphere_data;
 
 typedef struct s_light_data

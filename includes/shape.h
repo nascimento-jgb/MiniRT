@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:23:12 by helneff           #+#    #+#             */
-/*   Updated: 2023/04/28 12:50:03 by helneff          ###   ########.fr       */
+/*   Updated: 2023/04/29 09:51:10 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_shape
 
 t_shape	nearest_intersect(const t_state *state, t_ray ray);
 
-int		sphere_intersect(t_vec3 center, double radius, t_ray ray);
+int		sphere_intersect(t_vec3 center, double radius, t_ray ray,
+			t_sphere_data *sphere);
 
 #endif

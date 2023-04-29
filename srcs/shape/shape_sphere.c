@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:33:45 by helneff           #+#    #+#             */
-/*   Updated: 2023/04/28 15:23:10 by helneff          ###   ########.fr       */
+/*   Updated: 2023/04/29 09:51:14 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 #include "shape.h"
 
-int	sphere_intersect(t_vec3 center, double radius, t_ray ray)
+int	sphere_intersect(t_vec3 center, double radius, t_ray ray,
+	t_sphere_data *sphere)
 {
 	const t_vec3	oc = vec3_subtract(ray.orig, center);
 	const double	a = vec3_length_squared(ray.dir);
@@ -25,5 +26,10 @@ int	sphere_intersect(t_vec3 center, double radius, t_ray ray)
 	if (discriminant < 0)
 		return (-1.0);
 	else
-		return ((-half_b - sqrt(discriminant)) / a);
+	{
+		sphere->a = a;
+		sphere->half_b = half_b;
+		sphere->sqrtd = sqrt(discriminant);
+	}
+	return (1);
 }
