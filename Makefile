@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+         #
+#    By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/06 09:05:28 by jonascim          #+#    #+#              #
-#    Updated: 2023/04/28 12:58:12 by helneff          ###   ########.fr        #
+#    Updated: 2023/04/29 15:15:48 by jonascim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ PARSER_FILES	:=	parser.c		parser_utils.c		parser_camera.c parser_ambient.c \
 
 RENDER_FILES	:=	camera.c	image.c	color.c
 
-SHAPE_FILES		:=	shape.c	shape_sphere.c
+SHAPE_FILES		:=	shape.c	shape_sphere.c	shape_plane.c	shape_cylinder.c	shape_cone.c \
+
 
 SRC 		:= 	$(addprefix $(SRC_DIR), $(SRC_FILES))
 STRUCT 		:= 	$(addprefix $(STRUCT_DIR), $(STRUCT_FILES))

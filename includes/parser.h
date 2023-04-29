@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 16:29:59 by helneff           #+#    #+#             */
-/*   Updated: 2023/04/29 09:47:48 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/04/29 15:48:08 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ typedef struct s_cylinder_data
 	t_vec3					pos;
 	t_vec3					dir;
 	t_vec3					col;
+	t_vec3					ray_pos;
 	double					diameter;
 	double					height;
+	double					t1;
+	double					t2;
+	double					t;
 }	t_cylinder_data;
 
 typedef struct s_plane_data
@@ -31,6 +35,8 @@ typedef struct s_plane_data
 	t_vec3				pos;
 	t_vec3				dir;
 	t_vec3				col;
+	t_vec3				ray_pos;
+	double				t;
 }	t_plane_data;
 
 typedef struct s_sphere_data
@@ -43,6 +49,19 @@ typedef struct s_sphere_data
 	double					a;
 	double					sqrtd;
 }	t_sphere_data;
+
+typedef struct s_cone_data
+{
+	t_vec3	pos;
+	t_vec3	diameter;
+	t_vec3	dir;
+	t_vec3	pc;
+	double	height;
+	double	angle;
+	double	t1;
+	double	t2;
+	double	t;
+}	t_cone_data;
 
 typedef struct s_light_data
 {
