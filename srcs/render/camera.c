@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:51:58 by helneff           #+#    #+#             */
-/*   Updated: 2023/05/02 13:48:05 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/02 13:56:28 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ray_trace(const t_state *state, t_ray ray)
 	color = (t_vec3){0, 0, 0};
 	if (shape.type != SHAPE_NONE)
 		color = shape.hit.ray_color;
-	return (vec2col(state, vec3_scalar(color, 1.0 / 255.999), 0));
+	return (vec2col(state, color, 0));
 }
 
 static void	iterate_pixels(
