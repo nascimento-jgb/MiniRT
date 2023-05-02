@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:51:58 by helneff           #+#    #+#             */
-/*   Updated: 2023/05/02 13:56:28 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/02 16:45:40 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,30 @@
 #include "color.h"
 #include "shape.h"
 
+#include <stdio.h>
+
+static int	calculate_lighting(
+	const t_state *state, t_ray ray, const t_shape *shape)
+{
+	const t_vec3	ambient = vec3_scalar(shape->hit.ray_color, state->scene->ambient.ratio);
+	const t_vec3	diffuse = vec3_scalar(
+		vec3_scalar(shape->hit.ray_color, state->scene->light.ratio),
+		vec3_dot(shape->hit.normal, vec3_unit(vec3_subtract(state->scene->light.pos, shape->hit.pos))));
+	const t_vec3	result = vec3_add(ambient, diffuse);
+
+	(void)ray;
+	return (vec2col(state, result, 0));
+}
+
 static int	ray_trace(const t_state *state, t_ray ray)
 {
 	const t_shape	shape = nearest_intersect(state, ray);
-	t_vec3			color;
+	int				color;
 
-	color = (t_vec3){0, 0, 0};
+	color = 0;
 	if (shape.type != SHAPE_NONE)
-		color = shape.hit.ray_color;
-	return (vec2col(state, color, 0));
+		color = calculate_lighting(state, ray, &shape);
+	return (color);
 }
 
 static void	iterate_pixels(

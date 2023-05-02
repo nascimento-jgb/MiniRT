@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:33:45 by helneff           #+#    #+#             */
-/*   Updated: 2023/05/02 14:32:32 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/02 16:36:45 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,24 @@
 #include "vec3.h"
 #include "shape.h"
 
+#include <stdio.h>
+
 t_intersect	sphere_intersect(t_vec3 center, double radius, t_ray ray)
 {
 	const t_vec3	oc = vec3_subtract(ray.orig, center);
 	const double	a = vec3_length_squared(ray.dir);
 	const double	half_b = vec3_dot(oc, ray.dir);
-	const double	c = vec3_length_squared(oc) - radius * radius;
-	const double	discriminant = half_b * half_b - a * c;
+	const double	discriminant = half_b * half_b - a
+		* (vec3_length_squared(oc) - radius * radius);
+	t_intersect		intersect;
 
+	intersect.t = -1;
 	if (discriminant < 0)
-		return ((t_intersect){-1.0, {0}});
-	else
-		return ((t_intersect){(-half_b - sqrt(discriminant)) / a, {0}});
+		return (intersect);
+	intersect.t = (-half_b - sqrt(discriminant)) / a;
+	intersect.pos = vec3_add(ray.orig, vec3_scalar(ray.dir, intersect.t));
+	intersect.normal = vec3_unit(vec3_subtract(center, intersect.pos));
+	return (intersect);
 }
 
 void	nearest_intersect_sphere(
@@ -44,7 +50,7 @@ void	nearest_intersect_sphere(
 		{
 			shape->type = SHAPE_SPHERE;
 			shape->data.sphere = iter.sphere;
-			shape->hit.t = intersect.t;
+			shape->hit = intersect;
 			shape->hit.ray_color = vec3_scalar(iter.sphere->col, 1 / 255.999);
 		}
 		iter.sphere = iter.sphere->next;

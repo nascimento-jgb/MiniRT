@@ -6,11 +6,13 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:41:36 by helneff           #+#    #+#             */
-/*   Updated: 2023/05/02 13:49:54 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/02 16:36:49 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shape.h"
+
+#include <stdio.h>
 
 t_shape	nearest_intersect(const t_state *state, t_ray ray)
 {
