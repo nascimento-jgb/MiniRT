@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:33:45 by helneff           #+#    #+#             */
-/*   Updated: 2023/05/02 13:57:03 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/02 14:32:32 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	nearest_intersect_sphere(
 			shape->type = SHAPE_SPHERE;
 			shape->data.sphere = iter.sphere;
 			shape->hit.t = intersect.t;
+			shape->hit.ray_color = vec3_scalar(iter.sphere->col, 1 / 255.999);
 		}
 		iter.sphere = iter.sphere->next;
 	}
-	shape->hit.ray_color = vec3_scalar(shape->data.sphere->col, 1 / 255.999);
 }
