@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 16:29:59 by helneff           #+#    #+#             */
-/*   Updated: 2023/05/02 12:51:06 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/02 13:40:02 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,17 @@ typedef struct s_sphere_data
 
 typedef struct s_cone_data
 {
-	t_vec3	pos;
-	t_vec3	diameter;
-	t_vec3	dir;
-	t_vec3	pc;
-	double	height;
-	double	angle;
-	double	t1;
-	double	t2;
-	double	t;
+	struct s_cone_data	*next;
+	t_vec3				pos;
+	t_vec3				diameter;
+	t_vec3				dir;
+	t_vec3				pc;
+	t_vec3				col;
+	double				height;
+	double				angle;
+	double				t1;
+	double				t2;
+	double				t;
 }	t_cone_data;
 
 typedef struct s_light_data

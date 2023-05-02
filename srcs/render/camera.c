@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:51:58 by helneff           #+#    #+#             */
-/*   Updated: 2023/04/28 15:20:35 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/02 13:48:05 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,14 @@
 #include "color.h"
 #include "shape.h"
 
-static int	ray_color(const t_state *state, t_ray ray)
+static int	ray_trace(const t_state *state, t_ray ray)
 {
 	const t_shape	shape = nearest_intersect(state, ray);
 	t_vec3			color;
 
 	color = (t_vec3){0, 0, 0};
-	if (shape.type == SHAPE_SPHERE)
-		color = shape.data.sphere->col;
-	else if (shape.type == SHAPE_PLANE)
-		color = shape.data.plane->col;
-	else if (shape.type == SHAPE_CYLINDER)
-		color = shape.data.cylinder->col;
+	if (shape.type != SHAPE_NONE)
+		color = shape.hit.ray_color;
 	return (vec2col(state, vec3_scalar(color, 1.0 / 255.999), 0));
 }
 
@@ -85,6 +81,6 @@ t_image	*render(t_camera *camera, const t_state *state)
 	if (init_image(&camera->image, state->window) == -1)
 		return (NULL);
 	fill_color(&camera->image, background);
-	iterate_pixels(state, camera, ray_color);
+	iterate_pixels(state, camera, ray_trace);
 	return (&camera->image);
 }
