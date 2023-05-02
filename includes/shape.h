@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:23:12 by helneff           #+#    #+#             */
-/*   Updated: 2023/04/28 12:50:03 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/02 12:40:00 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ typedef struct s_shape
 
 t_shape	nearest_intersect(const t_state *state, t_ray ray);
 
-int		sphere_intersect(t_vec3 center, double radius, t_ray ray);
+double	sphere_intersect(t_vec3 center, double radius, t_ray ray);
 
 #endif

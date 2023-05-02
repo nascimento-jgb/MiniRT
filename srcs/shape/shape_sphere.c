@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:33:45 by helneff           #+#    #+#             */
-/*   Updated: 2023/04/28 15:23:10 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/02 12:39:48 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "shape.h"
 
-int	sphere_intersect(t_vec3 center, double radius, t_ray ray)
+double	sphere_intersect(t_vec3 center, double radius, t_ray ray)
 {
 	const t_vec3	oc = vec3_subtract(ray.orig, center);
 	const double	a = vec3_length_squared(ray.dir);
