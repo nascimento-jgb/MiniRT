@@ -6,12 +6,13 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:33:45 by helneff           #+#    #+#             */
-/*   Updated: 2023/05/02 12:39:48 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/02 12:47:37 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 
+#include "vec3.h"
 #include "shape.h"
 
 double	sphere_intersect(t_vec3 center, double radius, t_ray ray)

@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 16:29:59 by helneff           #+#    #+#             */
-/*   Updated: 2023/04/24 16:28:37 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/02 12:51:06 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ typedef struct s_cylinder_data
 	t_vec3					pos;
 	t_vec3					dir;
 	t_vec3					col;
+	t_vec3					ray_pos;
 	double					diameter;
 	double					height;
+	double					t1;
+	double					t2;
+	double					t;
 }	t_cylinder_data;
 
 typedef struct s_plane_data
@@ -31,6 +35,8 @@ typedef struct s_plane_data
 	t_vec3				pos;
 	t_vec3				dir;
 	t_vec3				col;
+	t_vec3				ray_pos;
+	double				t;
 }	t_plane_data;
 
 typedef struct s_sphere_data
@@ -40,6 +46,19 @@ typedef struct s_sphere_data
 	t_vec3					col;
 	double					diameter;
 }	t_sphere_data;
+
+typedef struct s_cone_data
+{
+	t_vec3	pos;
+	t_vec3	diameter;
+	t_vec3	dir;
+	t_vec3	pc;
+	double	height;
+	double	angle;
+	double	t1;
+	double	t2;
+	double	t;
+}	t_cone_data;
 
 typedef struct s_light_data
 {

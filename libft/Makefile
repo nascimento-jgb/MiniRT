@@ -32,11 +32,11 @@ all: $(NAME)
 $(NAME): $(notdir $(OBJ))
 
 $(OBJ): $(SRC)
-	cc -c $(COMPILE_FLAGS) $(SRC)
-	ar rcs $(NAME) $(notdir $(OBJ))
+	@cc -c $(COMPILE_FLAGS) $(SRC)
+	@ar rcs $(NAME) $(notdir $(OBJ))
 
 clean:
-	rm -f $(notdir $(OBJ))
+	@rm -f $(notdir $(OBJ))
 
 fclean: clean
 	rm -f $(NAME)

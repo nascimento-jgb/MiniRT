@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:23:12 by helneff           #+#    #+#             */
-/*   Updated: 2023/05/02 12:40:00 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/02 12:49:18 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ typedef enum e_shape_type
 	SHAPE_NONE,
 	SHAPE_SPHERE,
 	SHAPE_PLANE,
-	SHAPE_CYLINDER
+	SHAPE_CYLINDER,
+	SHAPE_CONE
 }	t_shape_type;
 
 typedef union u_shape_data
@@ -30,6 +31,7 @@ typedef union u_shape_data
 	t_sphere_data	*sphere;
 	t_plane_data	*plane;
 	t_cylinder_data	*cylinder;
+	t_cone_data		*cone;
 }	t_shape_data;
 
 typedef struct s_shape
