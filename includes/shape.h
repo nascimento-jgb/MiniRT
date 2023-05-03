@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:23:12 by helneff           #+#    #+#             */
-/*   Updated: 2023/05/02 15:00:40 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/03 11:11:49 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ t_shape		nearest_intersect(const t_state *state, t_ray ray);
 t_intersect	sphere_intersect(t_vec3 center, double radius, t_ray ray);
 void		nearest_intersect_sphere(
 				const t_state *state, t_ray ray, t_shape *shape);
-
+t_intersect	plane_intersect(t_ray ray, t_plane_data *plane);
+void		nearest_intersect_plane(const t_state *state, t_ray ray,
+				t_shape *shape);
 #endif

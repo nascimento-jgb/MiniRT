@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:12:14 by jonascim          #+#    #+#             */
-/*   Updated: 2023/04/29 15:37:25 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/05/03 11:11:06 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	cylinder_intersect_pt2(t_ray ray, t_cylinder_data *cylinder)
 	if (y < 0 || y > cylinder->height)
 		return (1);
 	cylinder->ray_pos = p;
-	// condiser normal only if the drawing needs the normal
+	// consider normal only if the drawing needs the normal
 	// cylidner->normal = vec3_unit(vec3_subtract(p, vec3_add(cylinder->pos, vec3_scalar(cylinder->dir, y))));
 	return (0);
 }

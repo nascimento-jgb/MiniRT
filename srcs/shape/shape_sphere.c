@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:33:45 by helneff           #+#    #+#             */
-/*   Updated: 2023/05/02 16:36:45 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/03 11:59:23 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ t_intersect	sphere_intersect(t_vec3 center, double radius, t_ray ray)
 		return (intersect);
 	intersect.t = (-half_b - sqrt(discriminant)) / a;
 	intersect.pos = vec3_add(ray.orig, vec3_scalar(ray.dir, intersect.t));
-	intersect.normal = vec3_unit(vec3_subtract(center, intersect.pos));
+	//intersect.normal = vec3_unit(vec3_subtract(center, intersect.pos));
+	intersect.normal = vec3_scalar(vec3_subtract(intersect.pos, center), 1/radius);
+	if (vec3_dot(ray.dir, intersect.normal) > 0)
+		intersect.normal = vec3_scalar(intersect.normal, -1);
 	return (intersect);
 }
 
