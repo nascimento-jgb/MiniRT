@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:44:42 by helneff           #+#    #+#             */
-/*   Updated: 2023/04/24 14:03:35 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/08 13:06:18 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	parse_sphere(t_scene_data *scene, const char *elem)
 		return (free(sphere), 1);
 	sphere->next = scene->spheres;
 	scene->spheres = sphere;
+	sphere->id = scene->next_id++;
 	return (0);
 }

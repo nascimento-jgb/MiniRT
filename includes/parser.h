@@ -6,17 +6,20 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 16:29:59 by helneff           #+#    #+#             */
-/*   Updated: 2023/05/02 13:40:02 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/15 15:29:24 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
+# include <stdlib.h>
+
 # include "vec3.h"
 
 typedef struct s_cylinder_data
 {
+	size_t					id;
 	struct s_cylinder_data	*next;
 	t_vec3					pos;
 	t_vec3					dir;
@@ -24,43 +27,25 @@ typedef struct s_cylinder_data
 	t_vec3					ray_pos;
 	double					diameter;
 	double					height;
-	double					t1;
-	double					t2;
-	double					t;
 }	t_cylinder_data;
 
 typedef struct s_plane_data
 {
+	size_t				id;
 	struct s_plane_data	*next;
 	t_vec3				pos;
 	t_vec3				dir;
 	t_vec3				col;
-	t_vec3				ray_pos;
-	double				t;
 }	t_plane_data;
 
 typedef struct s_sphere_data
 {
+	size_t					id;
 	struct s_sphere_data	*next;
 	t_vec3					pos;
 	t_vec3					col;
 	double					diameter;
 }	t_sphere_data;
-
-typedef struct s_cone_data
-{
-	struct s_cone_data	*next;
-	t_vec3				pos;
-	t_vec3				diameter;
-	t_vec3				dir;
-	t_vec3				pc;
-	t_vec3				col;
-	double				height;
-	double				angle;
-	double				t1;
-	double				t2;
-	double				t;
-}	t_cone_data;
 
 typedef struct s_light_data
 {
@@ -84,6 +69,7 @@ typedef struct s_camera_data
 
 typedef struct s_scene_data
 {
+	size_t					next_id;
 	t_camera_data			camera;
 	t_ambient_light_data	ambient;
 	t_light_data			light;

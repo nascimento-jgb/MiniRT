@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:44:42 by helneff           #+#    #+#             */
-/*   Updated: 2023/04/24 14:02:54 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/08 13:06:35 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int	parse_plane(t_scene_data *scene, const char *elem)
 		return (free(plane), 1);
 	plane->next = scene->planes;
 	scene->planes = plane;
+	plane->id = scene->next_id++;
 	return (0);
 }

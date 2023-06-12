@@ -40,5 +40,5 @@ int	parse_cylinder(t_scene_data *scene, const char *elem)
 		return (free(cylinder), 1);
 	cylinder->next = scene->cylinders;
 	scene->cylinders = cylinder;
-	return (0);
+	return (0 * (cylinder->id = scene->next_id++));
 }

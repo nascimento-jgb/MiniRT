@@ -6,7 +6,7 @@
 /*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 16:29:14 by helneff           #+#    #+#             */
-/*   Updated: 2023/04/24 17:14:26 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/22 12:59:52 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static int	parse_element(t_scene_data *scene, const char *elem)
 	i = 0;
 	while (identifiers[i] != NULL)
 	{
-		if (ft_strncmp(elem, identifiers[i], 2) == 0)
+		if (ft_strncmp(elem, identifiers[i], 2) == 0
+			&& (elem[1] == ' ' || elem[2] == ' '))
 		{
 			skip_identifier(&elem);
 			if (parsers[i](scene, elem) != 0)

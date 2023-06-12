@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:51:58 by helneff           #+#    #+#             */
-/*   Updated: 2023/05/03 10:56:21 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/05/19 17:02:26 by helneff          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,12 @@
 #include "parser.h"
 #include "color.h"
 #include "shape.h"
+#include "light.h"
 
 #include <stdio.h>
+#include <math.h>
 
-static int	calculate_lighting(
-	const t_state *state, t_ray ray, const t_shape *shape)
-{
-	const t_vec3	ambient = vec3_scalar(shape->hit.ray_color, state->scene->ambient.ratio);
-	const t_vec3	diffuse = vec3_scalar(
-		vec3_scalar(shape->hit.ray_color, state->scene->light.ratio),
-		vec3_dot(shape->hit.normal, vec3_unit(vec3_subtract(state->scene->light.pos, shape->hit.pos))));
-	const t_vec3	result = vec3_add(ambient, diffuse);
-
-	(void)ray;
-	return (vec2col(state, result, 0));
-}
-
-static int	ray_trace(const t_state *state, t_ray ray)
+int	ray_trace(const t_state *state, t_ray ray)
 {
 	const t_shape	shape = nearest_intersect(state, ray);
 	int				color;
@@ -73,20 +62,30 @@ static void	iterate_pixels(
 	}
 }
 
-void	init_camera(t_camera *camera, double aspect_ratio)
+void	init_camera(t_camera *camera, double aspect_ratio, const t_state *state)
 {
-	camera->orig = (t_vec3){0.0, 0.0, 0.0};
-	camera->dir = (t_vec3){0.0, 0.0, -1.0};
+	const double	theta = state->scene->camera.fov * M_PI / 180;
+	t_vec3			right;
+
+	camera->orig = state->scene->camera.pos;
+	camera->dir = vec3_unit(state->scene->camera.dir);
+	if (camera->dir.x == 0 && camera->dir.z == 0)
+		camera->dir.x = 0.0001;
 	camera->aspect_ratio = aspect_ratio;
-	camera->focal_length = 1;
-	camera->height = 2;
+	camera->height = 2 * tan(theta / 2);
 	camera->width = camera->height * aspect_ratio;
-	camera->hori = (t_vec3){camera->width, 0, 0};
-	camera->vert = (t_vec3){0, camera->height, 0};
-	camera->ll_corner = vec3_subtract(vec3_subtract(vec3_subtract(
-					camera->orig, vec3_scalar(camera->hori, 0.5)),
+	camera->focal_length = 1;
+	right = vec3_unit(vec3_cross(camera->dir, (t_vec3){0, 1, 0}));
+	camera->hori = vec3_negate(vec3_scalar(right, camera->width));
+	camera->vert = vec3_scalar(
+			vec3_cross(camera->hori, camera->dir), camera->height);
+	camera->ll_corner = vec3_subtract(
+			vec3_subtract(
+				vec3_subtract(
+					camera->orig,
+					vec3_scalar(camera->hori, 0.5)),
 				vec3_scalar(camera->vert, 0.5)),
-			(t_vec3){0, 0, camera->focal_length});
+			vec3_scalar(camera->dir, camera->focal_length));
 }
 
 t_image	*render(t_camera *camera, const t_state *state)

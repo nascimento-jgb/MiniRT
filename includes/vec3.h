@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 12:38:56 by jonascim          #+#    #+#             */
-/*   Updated: 2023/04/25 13:41:55 by helneff          ###   ########.fr       */
+/*   Updated: 2023/05/04 10:57:03 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ t_vec3	vec3_negate(t_vec3 v);
 double	vec3_length_squared(t_vec3 v);
 double	vec3_magnitude(t_vec3 v);
 t_vec3	vec3_unit(t_vec3 v);
-
+t_vec3	vec3_reflect(t_vec3 v, t_vec3 n);
 #endif

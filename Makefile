@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+         #
+#    By: helneff <helneff@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/06 09:05:28 by jonascim          #+#    #+#              #
-#    Updated: 2023/04/29 15:15:48 by jonascim         ###   ########.fr        #
+#    Updated: 2023/05/19 19:17:31 by helneff          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:= minirt
+NAME		:= miniRT
 LIBFT		:= libft
 INCLUDE		:= includes
 CC			:= cc
-CFLAGS		:= -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS		:= -Wall -Werror -Wextra -O3
 MLXFLAGS	:= -framework OpenGL -framework AppKit
 RM			:= rm -f
 
@@ -31,9 +31,9 @@ STRUCT_FILES	:=	vec3_arithmetic.c	vec3_utils.c ray.c
 PARSER_FILES	:=	parser.c		parser_utils.c		parser_camera.c parser_ambient.c \
 					parser_light.c	parser_sphere.c		parser_plane.c	parser_cylinder.c
 
-RENDER_FILES	:=	camera.c	image.c	color.c
+RENDER_FILES	:=	camera.c	image.c	color.c	light.c
 
-SHAPE_FILES		:=	shape.c	shape_sphere.c	shape_plane.c	shape_cylinder.c	shape_cone.c \
+SHAPE_FILES		:=	shape.c	shape_sphere.c	shape_plane.c	shape_cylinder.c
 
 
 SRC 		:= 	$(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -57,4 +57,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re norm
+.PHONY:		all clean fclean re
